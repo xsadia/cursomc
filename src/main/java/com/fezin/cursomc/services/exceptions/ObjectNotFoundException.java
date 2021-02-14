@@ -1,4 +1,4 @@
-package com.fezin.cursomc.exceptions;
+package com.fezin.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 

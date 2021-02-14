@@ -3,11 +3,13 @@ package com.fezin.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fezin.cursomc.domain.Categoria;
-import com.fezin.cursomc.exceptions.ObjectNotFoundException;
 import com.fezin.cursomc.repositories.CategoriaRepository;
+import com.fezin.cursomc.services.exceptions.DataIntegrityException;
+import com.fezin.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -26,6 +28,18 @@ public class CategoriaService {
 		obj.setId(null);
 
 		return repository.save(obj);
+	}
+	
+	public void delete(Long id) {
+		find(id);
+		try {
+			repository.deleteById(id);
+		}
+		
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos."); 
+		}
+		
 	}
 
 	public Categoria update(Long id, Categoria obj) {

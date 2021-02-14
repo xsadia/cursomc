@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.fezin.cursomc.domain.Categoria;
 import com.fezin.cursomc.domain.Pedido;
-import com.fezin.cursomc.exceptions.ObjectNotFoundException;
 import com.fezin.cursomc.repositories.PedidoRepository;
+import com.fezin.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {
