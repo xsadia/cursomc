@@ -11,20 +11,30 @@ import com.fezin.cursomc.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository repository;
-	
-	public Categoria buscar(Long id) {
+
+	public Categoria find(Long id) {
 		Optional<Categoria> obj = repository.findById(id);
-		
+
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
-	
+
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
-		
+
 		return repository.save(obj);
+	}
+
+	public Categoria update(Long id, Categoria obj) {
+		Categoria entity = find(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void updateData(Categoria entity, Categoria obj) {
+		entity.setNome(obj.getNome());
 	}
 }
