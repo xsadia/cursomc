@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fezin.cursomc.domain.Categoria;
+import com.fezin.cursomc.dto.CategoriaDTO;
 import com.fezin.cursomc.repositories.CategoriaRepository;
 import com.fezin.cursomc.services.exceptions.DataIntegrityException;
 import com.fezin.cursomc.services.exceptions.ObjectNotFoundException;
@@ -64,5 +65,9 @@ public class CategoriaService {
 
 	private void updateData(Categoria entity, Categoria obj) {
 		entity.setNome(obj.getNome());
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 }
