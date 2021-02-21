@@ -33,7 +33,7 @@ public class ClienteResource {
 	private ClienteService service;
 	
 	@PostMapping
-	public ResponseEntity<Cliente> insert(@RequestBody ClienteNewDTO objDto) {
+	public ResponseEntity<Cliente> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.fromDTO(objDto);
 		service.insert(obj);
 		
